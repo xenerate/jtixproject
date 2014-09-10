@@ -1,5 +1,6 @@
 package GUI;
 
+import AppStates.Puzzle;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
@@ -14,10 +15,14 @@ import de.lessvoid.nifty.screen.ScreenController;
 public class GuiControl extends AbstractAppState implements ScreenController{
     
     private Nifty nifty;
+    private AppStateManager stateManager;
+    private Application app;
     
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        this.stateManager = stateManager;
+        this.app = app;
     }
     
     public void bind(Nifty nifty, Screen screen) {
@@ -32,13 +37,12 @@ public class GuiControl extends AbstractAppState implements ScreenController{
 
     public void onEndScreen() {
         System.out.println("onEndScreen");
+        Puzzle puzzle = new Puzzle();
+        puzzle.initialize(stateManager, app);
+        //nifty.exit();
 
     }
-    
-    public void quit(){
-        
-        nifty.gotoScreen("end");
-    }
+  
 
     
 }
