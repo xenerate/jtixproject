@@ -22,22 +22,20 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+    
         
+        //Start initialise nifty
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager,
                                                           inputManager,
                                                           audioRenderer,
                                                           guiViewPort);                                                         
         GuiControl guiControl = new GuiControl();
-        
         nifty = niftyDisplay.getNifty();
         nifty.fromXml("Interface/Nifty/gui.xml", "start", guiControl);
-        nifty.fromXml("Interface/Nifty/gui.xml", "end", guiControl);
-
         guiViewPort.addProcessor(niftyDisplay);
-
         flyCam.setEnabled(false);
         flyCam.setDragToRotate(true);
-        
+        //End Initialise nifty
         
     }
 
@@ -50,4 +48,5 @@ public class Main extends SimpleApplication {
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
     }
+    
 }
