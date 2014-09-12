@@ -1,6 +1,6 @@
 package GUI;
 
-import AppStates.Puzzle;
+import Core.Main;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
@@ -12,37 +12,38 @@ import de.lessvoid.nifty.screen.ScreenController;
  *
  * @author Student
  */
-public class GuiControl extends AbstractAppState implements ScreenController{
-    
+public class GuiControl extends AbstractAppState implements ScreenController {
+
     private Nifty nifty;
     private AppStateManager stateManager;
-    private Application app;
-    
+    private Main app;
+
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         this.stateManager = stateManager;
-        this.app = app;
+        this.app = (Main) app;
     }
-    
+
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
-        System.out.println("bind( " + screen.getScreenId() + ")");
     }
 
     public void onStartScreen() {
-        System.out.println("onStartScreen");
 
     }
 
     public void onEndScreen() {
-        System.out.println("onEndScreen");
-        Puzzle puzzle = new Puzzle();
-        puzzle.initialize(stateManager, app);
-        //nifty.exit();
+        
 
     }
-  
-
     
+    public void clickPlayGame(){
+        app.startGame();
+        
+    }
+    public void clickExitGame(){
+        
+        app.endGame();
+    }
 }
