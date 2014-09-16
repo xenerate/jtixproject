@@ -1,18 +1,15 @@
 package Core;
 
-import AppStates.Puzzle;
+import AppStates.PuzzleAppState;
 import GUI.GuiControl;
 import com.jme3.app.SimpleApplication;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.RenderManager;
 import de.lessvoid.nifty.Nifty;
 
-/**
- * Written By Imran Kaba & Julian Palmieri
- */
 public class Main extends SimpleApplication {
 
-    //Initialise Nifty variable.
+    //Initialise the Nifty and Application variable.
     private Nifty nifty;
     private static Main application;
 
@@ -30,7 +27,7 @@ public class Main extends SimpleApplication {
 
 
         Factory.initializeFactory(assetManager, audioRenderer,
-                guiViewPort, rootNode);
+                guiViewPort, rootNode, inputManager);
 
         //Start initialise nifty
         NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager,
@@ -44,7 +41,6 @@ public class Main extends SimpleApplication {
         nifty.fromXml("Interface/Nifty/gui.xml", "start", guiControl);
         guiViewPort.addProcessor(niftyDisplay);
         flyCam.setEnabled(false);
-        flyCam.setDragToRotate(true);
         //End Initialise nifty
 
     }
@@ -61,15 +57,18 @@ public class Main extends SimpleApplication {
     
     public void startGame() {
         
+    }
+    
+   public void startPuzzle() {
+        
         nifty.removeScreen("start");      
-        Puzzle puzzle = new Puzzle();
-        puzzle.initialize(stateManager, (Main) application);
-        flyCam.setEnabled(true);
-        flyCam.setDragToRotate(true);
+        PuzzleAppState puzzle = new PuzzleAppState(rootNode);
+        stateManager.attach(puzzle);
     }
        
     public void endGame() {
         
         application.stop();
     }
+
 }
