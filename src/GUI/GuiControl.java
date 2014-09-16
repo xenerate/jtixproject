@@ -39,7 +39,7 @@ public class GuiControl extends AbstractAppState implements ScreenController {
     }
     
     public void clickPlayGame(){
-        app.startGame();
+        app.startPuzzle();
         
     }
     public void clickExitGame(){
